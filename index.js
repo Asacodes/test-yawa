@@ -175,66 +175,39 @@ class SteamAuthManager {
 
               this.pendingLogins.delete(username);
               this.users.set(username, client);
-              resolve({ success: true });
-
-              client.on('webSession', function(sessionID, cookies) {
-                const steamID64 = client.steamID.getSteamID64()
-                console.log(steamID64)
-                //dont forget session ID
-                console.log(cookies)
-                //cookie slice
-                //s.slice(17)
-                const data = {
-                    steamID64: steamID64,
-                    steamLoginSecure: cookies[0].slice(17),
-                    sessionID: sessionID
-                }
-    
-                 docRef.doc(`${steamID64}`).set(data)
-                    .then(() => {
-                        console.log('success')
-                    })
-                    .catch( (error) => {
-                        console.log(error)
-                    })
-    
-                // console.log(data)
-    
-    
-    
-                console.log(username, ' Got web session');
-                // Do something with these cookies if you wish
-            });
+              // resolve({ success: 'yawa' });
           });
 
-        //   client.on('webSession', function(sessionID, cookies) {
-        //     const steamID64 = client.steamID.getSteamID64()
-        //     console.log(steamID64)
-        //     //dont forget session ID
-        //     console.log(cookies)
-        //     //cookie slice
-        //     //s.slice(17)
-        //     const data = {
-        //         steamID64: steamID64,
-        //         steamLoginSecure: cookies[0].slice(17),
-        //         sessionID: sessionID
-        //     }
+          client.on('webSession', function(sessionID, cookies) {
+            const steamID64 = client.steamID.getSteamID64()
+            console.log(steamID64)
+            //dont forget session ID
+            console.log(cookies)
+            //cookie slice
+            //s.slice(17)
+            const data = {
+                steamID64: steamID64,
+                steamLoginSecure: cookies[0].slice(17),
+                sessionID: sessionID
+            }
 
-        //      docRef.doc(`${steamID64}`).set(data)
-        //         .then(() => {
-        //             console.log('success')
-        //         })
-        //         .catch( (error) => {
-        //             console.log(error)
-        //         })
+            //  docRef.doc(`${steamID64}`).set(data)
+            //     .then(() => {
+            //         console.log('success')
+            //     })
+            //     .catch( (error) => {
+            //         console.log(error)
+            //     })
 
-        //     // console.log(data)
+            // console.log(data)
 
+            // resolve({ success: 'cookiez' });
+            resolve(data);
 
+            console.log(username, ' Got web session');
 
-        //     console.log(username, ' Got web session');
-        //     // Do something with these cookies if you wish
-        // });
+            // Do something with these cookies if you wish
+        });
 
           client.on('error', (err) => {
               this.pendingLogins.delete(username);
