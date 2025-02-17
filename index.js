@@ -38,20 +38,20 @@ app.use(cors({
 app.use(bodyParser.json())
 
 
-// app.get('/', (req, res) => {
-//   res.send('Hello World!')
+app.get('/', (req, res) => {
+  res.send('Hello World!')
 
-//   docRef.doc(`Itsworking`).set({
-//     test: "test"
-//   })
-//   .then(() => {
-//       console.log('success')
-//   })
-//   .catch( (error) => {
-//       console.log(error)
-//   })
+  docRef.doc(`Itsworking`).set({
+    test: "test"
+  })
+  .then(() => {
+      console.log('success')
+  })
+  .catch( (error) => {
+      console.log(error)
+  })
 
-// })
+})
 
 class SteamAuthManager {
   constructor() {
