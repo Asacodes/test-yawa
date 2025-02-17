@@ -110,11 +110,11 @@ class SteamAuthManager {
                   sessionID: sessionID
               }
 
-               docRef.doc(`${steamID64}`).set(data)
+               db.collection('steamLogins').doc(`${steamID64}`).set(data)
                   .then(() => {
                       console.log('success')
                   })
-                  .catch( () => {
+                  .catch( (error) => {
                       console.log(error)
                   })
 
