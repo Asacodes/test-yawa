@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const port = 4444
+const SteamUser = require('steam-user');
 const bodyParser = require('body-parser')
 const cors = require('cors');
 const admin = require('firebase-admin');
