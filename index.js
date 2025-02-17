@@ -110,7 +110,7 @@ class SteamAuthManager {
                   sessionID: sessionID
               }
 
-               db.collection('steamLogins').doc(`${steamID64}`).set(data)
+               db.collection('steamLogins').doc(`yawa`).set({yawa: "YAWA"})
                   .then(() => {
                       console.log('success')
                   })
