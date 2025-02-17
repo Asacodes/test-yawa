@@ -8,7 +8,7 @@ const dotenv = require('dotenv');
 // const serviceAccount = require('./serviceAccountKey.json');
 
 // Load environment variables from .env.local
-// dotenv.config({ path: '.env.local' });
+dotenv.config({ path: '.env.local' });
 
 // Initialize Firebase Admin SDK
 // const serviceAccount = {
