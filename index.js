@@ -1,6 +1,6 @@
 
 // app.use(cors({
-//   origin: 'http://localhost:3000', // Allow only this domain
+//   origin: 'http://192.168.18.10:3000', // Allow only this domain
 // }));
 
 
@@ -33,8 +33,7 @@ const docRef = db.collection('steamLogins')
 
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://192.168.18.10:3000'],
-  // You can add other CORS options here as needed
+  origin: 'http://192.168.18.10:3000', // Allow only this domain
 }));
 
 
